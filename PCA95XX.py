@@ -19,6 +19,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import platform
+
+if platform.system() == 'Windows':
+    # Replace libraries by fake ones
+    import sys
+    import fake_rpi
+
+    sys.modules['RPi'] = fake_rpi.RPi  # Fake RPi (GPIO)
+    sys.modules['smbus'] = fake_rpi.smbus  # Fake smbus (I2C)
+
 import smbus
 
 # For the PCA 953X and 955X series, the chips with 8 GPIO's have these port numbers
