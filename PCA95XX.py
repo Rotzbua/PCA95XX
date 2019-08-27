@@ -33,8 +33,8 @@ CONFIG_PORT = 3
 class PCA95XX(object):
 
     def __init__(self, busnum, address, num_gpios):
-        self.bus = smbus.SMBus(busnum)
         assert 0 <= num_gpios <= 16, "Number of GPIOs must be between 0 and 16"
+        self.bus = smbus.SMBus(busnum)
         self.address = address
         self.num_gpios = num_gpios
         if num_gpios <= 8:
