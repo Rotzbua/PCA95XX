@@ -33,14 +33,14 @@ CONFIG_PORT = 3
 class PCA95XX(object):
 
     def __init__(self, busnum, address, num_gpios):
-        assert num_gpios >= 0 and num_gpios <= 16, "Number of GPIOs must be between 0 and 16"
         self.bus = smbus.SMBus(busnum)
+        assert 0 <= num_gpios <= 16, "Number of GPIOs must be between 0 and 16"
         self.address = address
         self.num_gpios = num_gpios
         if num_gpios <= 8:
             self.direction = self.bus.read_byte_date(address, CONFIG_PORT)
             self.outputvalue = self.bus.read_byte_data(address, OUTPUT_PORT)
-        elif num_gpios > 8 and num_gpios <= 16:
+        elif 8 < num_gpios <= 16:
             self.direction = self.bus.read_word_data(address, CONFIG_PORT << 1)
             self.outputvalue = self.bus.read_word_data(address, OUTPUT_PORT << 1)
 
@@ -57,11 +57,11 @@ class PCA95XX(object):
     # complete if passed in (IE it should not just be the value of the
     # single pin we are trying to change)
     def _readandchangepin(self, port, pin, value, portstate=None):
-        assert pin >= 0 and pin < self.num_gpios, "Pin number %s is invalid, only 0-%s are valid" % (pin, self.num_gpios)
+        assert 0 <= pin < self.num_gpios, "Pin number %s is invalid, only 0-%s are valid" % (pin, self.num_gpios)
         if not portstate:
             if self.num_gpios <= 8:
                 portstate = self.bus.read_byte_data(self.address, port)
-            elif self.num_gpios > 8 and self.num_gpios <= 16:
+            elif 8 < self.num_gpios <= 16:
                 portstate = self.bus.read_word_data(self.address, port << 1)
         newstate = self._changebit(portstate, pin, value)
         if self.num_gpios <= 8:
@@ -88,7 +88,7 @@ class PCA95XX(object):
         assert self.direction & (1 << pin) != 0, "Pin %s not set to input" % pin
         if self.num_gpios <= 8:
             value = self.bus.read_byte_data(self.address, INPUT_PORT)
-        elif self.num_gpios > 8 and self.num_gpios <= 16:
+        elif 8 < self.num_gpios <= 16:
             value = self.bus.read_word_data(self.address, INPUT_PORT << 1)
         return value & (1 << pin)
 
