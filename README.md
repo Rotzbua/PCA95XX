@@ -33,7 +33,7 @@ Note that this library requires python-smbus, and as a result,
 currently requires root permissions.
 
 Support for the PCA957X series could be added, but the registers used
-are slighty different.
+are slightly different.
 
 There is also a 24 GPIO version of these chips (TCA6424), which is
 not supported right now.
