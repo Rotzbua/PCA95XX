@@ -12,3 +12,5 @@ __author_email__ = "author@example.com"
 __maintainer__ = "unknown maintainer"
 __maintainer_email__ = "maintainer@example.com"
 __github_username__ = "Rotzbua"
+
+import PCA95XX
