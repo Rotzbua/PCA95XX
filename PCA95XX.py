@@ -102,6 +102,16 @@ class PCA95XX(object):
             value = self.bus.read_word_data(self.address, INPUT_PORT << 1)
         return value & (1 << pin)
 
+    def input_list_all(self):
+        if self.num_gpios <= 8:
+            value = self.bus.read_byte_data(self.address, INPUT_PORT)
+        if 8 < self.num_gpios <= 16:
+            value = self.bus.read_word_data(self.address, INPUT_PORT << 1)
+        state_list = []
+        for i in range(self.num_gpios):
+            state_list.append(value & (1 << i))
+        return state_list
+
 
 # RPi.GPIO compatible interface for PCA95XX You can pass this class
 # along to anything that expects an RPi.GPIO module and it should work
