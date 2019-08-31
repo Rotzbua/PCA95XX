@@ -1,4 +1,5 @@
 # Copyright 2012 Daniel Berlin
+# Copyright 2019 Ludwig Grill
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
