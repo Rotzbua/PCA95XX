@@ -1,5 +1,23 @@
-This library provides support for using PCA953X/5X chips.  It provides
-two interfaces:
+# Interface Library for PCA953X
+
+## Description
+
+This library provides support for using PCA953X/5X chips.
+
+## Requirements
+### Library Dependencies
+#### Linux / Raspberry
+This library requires python-smbus, and as a result, currently requires root permissions.
+#### Windows
+For development under Windows, a mockup library like `fake_rpi` is required.
+
+### Python version
+
+Code is compatible with python 3. Tested with python 3.7 (31.08.2019).
+
+## Structure
+
+Two interfaces are provided:
 
 1. A class that supports all the functionality of the chip directly,
 including changing polarity of pins. This class is named PCA95XX.
@@ -11,6 +29,9 @@ named PCA95XX_GPIO
 The RPi.GPIO compatible interface allows you to simply plug the I2C class
 into existing libraries that expect RPi.GPIO.  It does not support edge events
 or reading from output pins.
+
+
+## Example
 
 An example is AdaFruit's CharLCD library (which supports HD44780 compatible
 LCD's).
@@ -29,8 +50,7 @@ lcd = Adafruit_CharLCD(8,9, [10, 11, 12, 13], chip)
 
 From this point, the lcd object will function as it does normally.
 
-Note that this library requires python-smbus, and as a result,
-currently requires root permissions.
+## Limitations
 
 Support for the PCA957X series could be added, but the registers used
 are slightly different.
