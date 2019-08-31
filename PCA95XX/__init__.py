@@ -124,7 +124,7 @@ class PCA95XX(object):
             value = self.bus.read_word_data(self.address, INPUT_PORT << 1)
         state_list = []
         for i in range(self.num_gpios):
-            state_list.append(value & (1 << i))
+            state_list.append((value & (1 << i)) & 0x01)
         return state_list
 
 
