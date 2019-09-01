@@ -37,7 +37,7 @@ class PCA95XX(object):
         self.address = address
         self.num_gpios = num_gpios
         if num_gpios <= 8:
-            self.direction = self.bus.read_byte_date(address, CONFIG_PORT)
+            self.direction = self.bus.read_byte_data(address, CONFIG_PORT)
             self.outputvalue = self.bus.read_byte_data(address, OUTPUT_PORT)
         elif num_gpios > 8 and num_gpios <= 16:
             self.direction = self.bus.read_word_data(address, CONFIG_PORT << 1)
