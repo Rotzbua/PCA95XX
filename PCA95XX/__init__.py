@@ -104,6 +104,10 @@ class PCA95XX(object):
         self.direction = self._readandchangepin(CONFIG_PORT, pin, mode, self.direction)
         return self.direction
 
+    def config_all(self, mode):
+        for pin in range(self.num_gpios):
+            self.config(pin, mode)
+
     def output(self, pin, value):
         assert self.direction & (1 << pin) == 0, "Pin %s not set to output" % pin
         self.outputvalue = self._readandchangepin(OUTPUT_PORT, pin, value, self.outputvalue)
