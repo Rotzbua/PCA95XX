@@ -117,7 +117,7 @@ class PCA95XX(object):
             value = self.bus.read_word_data(self.address, INPUT_PORT << 1)
         return value & (1 << pin)
 
-    def input_state_(self, pin):
+    def input_state_pin(self, pin):
         """
         :param pin: Pin whose state should be returned.
         :return: 0 or 1 for pin state.
