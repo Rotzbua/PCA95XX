@@ -117,7 +117,26 @@ class PCA95XX(object):
             value = self.bus.read_word_data(self.address, INPUT_PORT << 1)
         return value & (1 << pin)
 
-    def input_list_all(self):
+    def input_state_(self, pin):
+        """
+        :param pin: Pin whose state should be returned.
+        :return: 0 or 1 for pin state.
+        """
+        assert self.direction & (1 << pin) != 0, "Pin %s not set to input" % pin
+        if self.num_gpios <= 8:
+            value = self.bus.read_byte_data(self.address, INPUT_PORT)
+        elif 8 < self.num_gpios <= 16:
+            value = self.bus.read_word_data(self.address, INPUT_PORT << 1)
+        return (value >> pin) & 0x01
+
+    def input_state_list_all(self):
+        """
+        Lists all states of the pins.
+        (outdated) Note: No check for input state, you have to ensure that every pin is in input mode.
+        :return: Integer list with state 0 or 1 of the according pin. E.g. [1, 0, 0, 1, 1, 1, 1, 1]
+        """
+        for pin in range(self.num_gpios):
+            assert self.direction & (1 << pin) != 0, "Pin %s not set to input" % pin
         if self.num_gpios <= 8:
             value = self.bus.read_byte_data(self.address, INPUT_PORT)
         if 8 < self.num_gpios <= 16:
