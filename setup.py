@@ -13,7 +13,7 @@ from datetime import date
 from setuptools import setup, find_packages
 
 # --- import your package ---
-import PCA95XX as package
+import __init__ as package
 
 if __name__ == "__main__":
     # --- Automatically generate setup parameters ---
@@ -30,8 +30,7 @@ if __name__ == "__main__":
     try:
         SHORT_DESCRIPTION = package.__short_description__  # GitHub Short Description
     except:
-        print(
-            "'__short_description__' not found in '%s.__init__.py'!" % PKG_NAME)
+        print("'__short_description__' not found in '%s.__init__.py'!" % PKG_NAME)
         SHORT_DESCRIPTION = "No short description!"
 
     # Long description will be the body of content on PyPI page
